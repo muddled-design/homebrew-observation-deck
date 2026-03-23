@@ -2,7 +2,7 @@ class ClaudeMonitor < Formula
   desc "Floating macOS dashboard that monitors all active Claude Code sessions"
   homepage "https://github.com/muddled-design/ObservationDeck"
   url "https://github.com/muddled-design/ObservationDeck/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "PLACEHOLDER_SHA256"
+  sha256 "30007440e297ad2f95160b68f89251a6741699ea3eac95cfde052945cfd3bd77"
   license "MIT"
 
   depends_on xcode: ["15.0", :build]
