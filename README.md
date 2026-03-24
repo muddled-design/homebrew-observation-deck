@@ -5,8 +5,7 @@ Floating macOS dashboard that monitors all active Claude Code sessions in real t
 ## Install
 
 ```bash
-brew tap muddled-design/observation-deck https://github.com/muddled-design/homebrew-observation-deck
-brew install observation-deck
+brew install muddled-design/observation-deck/observation-deck
 ```
 
 This will:
