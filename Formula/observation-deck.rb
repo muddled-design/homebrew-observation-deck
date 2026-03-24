@@ -1,4 +1,4 @@
-class ClaudeMonitor < Formula
+class ObservationDeck < Formula
   desc "Floating macOS dashboard that monitors all active Claude Code sessions"
   homepage "https://github.com/muddled-design/ObservationDeck"
   url "https://github.com/muddled-design/ObservationDeck/archive/refs/tags/v1.0.0.tar.gz"
@@ -28,18 +28,18 @@ class ClaudeMonitor < Formula
     (app_bundle/"Info.plist").write info_plist
 
     # Install the hook script to share for the install-hooks script to find
-    (share/"claude-monitor").mkpath
-    cp "monitor-hook.sh", share/"claude-monitor/monitor-hook.sh"
-    chmod 0755, share/"claude-monitor/monitor-hook.sh"
+    (share/"observation-deck").mkpath
+    cp "monitor-hook.sh", share/"observation-deck/monitor-hook.sh"
+    chmod 0755, share/"observation-deck/monitor-hook.sh"
 
     # Install the hook installer script
-    cp "scripts/install-hooks.sh", share/"claude-monitor/install-hooks.sh"
-    chmod 0755, share/"claude-monitor/install-hooks.sh"
+    cp "scripts/install-hooks.sh", share/"observation-deck/install-hooks.sh"
+    chmod 0755, share/"observation-deck/install-hooks.sh"
   end
 
   def post_install
     # Install hooks into Claude Code settings
-    hook_src = share/"claude-monitor/monitor-hook.sh"
+    hook_src = share/"observation-deck/monitor-hook.sh"
     hook_dest = Pathname.new(Dir.home)/".claude/monitor-hook.sh"
     status_dir = Pathname.new(Dir.home)/".claude/monitor-status"
     settings_file = Pathname.new(Dir.home)/".claude/settings.json"
@@ -78,7 +78,7 @@ class ClaudeMonitor < Formula
 
   test do
     assert_predicate prefix/"ClaudeMonitor.app/Contents/MacOS/ClaudeMonitor", :executable?
-    assert_predicate share/"claude-monitor/monitor-hook.sh", :exist?
+    assert_predicate share/"observation-deck/monitor-hook.sh", :exist?
   end
 
   private

@@ -1,4 +1,4 @@
-# Homebrew Tap for ClaudeMonitor
+# Homebrew Tap for Observation Deck
 
 Floating macOS dashboard that monitors all active Claude Code sessions in real time.
 
@@ -6,7 +6,7 @@ Floating macOS dashboard that monitors all active Claude Code sessions in real t
 
 ```bash
 brew tap muddled-design/observation-deck https://github.com/muddled-design/homebrew-observation-deck
-brew install claude-monitor
+brew install observation-deck
 ```
 
 This will:
@@ -17,16 +17,16 @@ This will:
 ## Launch
 
 ```bash
-open $(brew --prefix)/opt/claude-monitor/ClaudeMonitor.app
+open $(brew --prefix)/opt/observation-deck/ClaudeMonitor.app
 ```
 
 ## Uninstall
 
 ```bash
 # Remove hooks from Claude Code settings
-$(brew --prefix)/share/claude-monitor/install-hooks.sh --uninstall
+$(brew --prefix)/share/observation-deck/install-hooks.sh --uninstall
 
 # Uninstall the app
-brew uninstall claude-monitor
+brew uninstall observation-deck
 brew untap muddled-design/observation-deck
 ```
