@@ -57,6 +57,9 @@ class ObservationDeck < Formula
     register_hooks(settings_file)
 
     ohai "Hooks installed! They will activate on your next Claude Code session."
+
+    # Launch the app
+    system "open", prefix/"ClaudeMonitor.app"
   end
 
   def caveats
