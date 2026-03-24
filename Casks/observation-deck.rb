@@ -1,6 +1,6 @@
 cask "observation-deck" do
-  version "1.0.0"
-  sha256 "612dac8a173e80b036103b6671267b17b826c0a1baba87843a869570c1283479"
+  version "1.0.1"
+  sha256 "d02b83661bdf1621826c420f16fff45f737e7b1787407c2af44ed86ea4b99370"
 
   url "https://github.com/muddled-design/ObservationDeck/releases/download/v#{version}/ClaudeMonitor-#{version}.dmg"
   name "Observation Deck"
