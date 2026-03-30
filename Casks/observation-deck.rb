@@ -1,6 +1,6 @@
 cask "observation-deck" do
-  version "1.0.2"
-  sha256 "7c6dc26fe95d80066d362375df9a2f4965771b93344e8482a37497e82407d4b2"
+  version "1.1.0"
+  sha256 "50d4884aa59a2e37dbb3e3b7b35a9e7155a486a6199b334505b250e2679691fe"
 
   url "https://github.com/muddled-design/ObservationDeck/releases/download/v#{version}/ClaudeMonitor-#{version}.dmg"
   name "Observation Deck"
@@ -12,7 +12,6 @@ cask "observation-deck" do
   app "ClaudeMonitor.app"
 
   postflight do
-    # Install the monitor hook script
     hook_dest = File.expand_path("~/.claude/monitor-hook.sh")
     status_dir = File.expand_path("~/.claude/monitor-status")
     settings_file = File.expand_path("~/.claude/settings.json")
@@ -20,11 +19,9 @@ cask "observation-deck" do
     FileUtils.mkdir_p(File.dirname(hook_dest))
     FileUtils.mkdir_p(status_dir)
 
-    # Write the hook script
     File.write(hook_dest, HOOK_SCRIPT)
     FileUtils.chmod(0755, hook_dest)
 
-    # Register hooks in settings.json
     require "json"
     hook_command = "bash ~/.claude/monitor-hook.sh"
     events = %w[Stop Notification PreToolUse PostToolUse SubagentStart SubagentStop]
@@ -55,16 +52,13 @@ cask "observation-deck" do
     settings["hooks"] = hooks
     File.write(settings_file, JSON.pretty_generate(settings))
 
-    # Launch the app
     system_command "/usr/bin/open", args: ["#{appdir}/ClaudeMonitor.app"]
   end
 
   uninstall_postflight do
-    # Remove hook script
     hook_path = File.expand_path("~/.claude/monitor-hook.sh")
     File.delete(hook_path) if File.exist?(hook_path)
 
-    # Remove hook entries from settings.json
     settings_file = File.expand_path("~/.claude/settings.json")
     if File.exist?(settings_file)
       require "json"
@@ -87,7 +81,7 @@ cask "observation-deck" do
 
   HOOK_SCRIPT = <<~'BASH'
     #!/bin/bash
-    # Claude Code hook script for Observation Deck
+    # Claude Code hook script for ClaudeMonitor
     # Reads hook event JSON from stdin and writes a status signal file.
 
     INPUT=$(cat)
@@ -119,8 +113,11 @@ cask "observation-deck" do
         ;;
       Notification)
         case "$NOTIF_TYPE" in
-          permission_prompt|elicitation_dialog)
+          permission_prompt)
             STATUS="needs_input"
+            ;;
+          elicitation_dialog)
+            STATUS="question_asked"
             ;;
           *)
             STATUS="idle"
