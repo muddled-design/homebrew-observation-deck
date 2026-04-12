@@ -5,20 +5,35 @@ Floating macOS dashboard that monitors all active Claude Code sessions in real t
 ## Install
 
 ```bash
-brew install --cask muddled-design/observation-deck/observation-deck
+brew tap muddled-design/observation-deck
+brew install observation-deck
 ```
 
-This will:
-1. Install the app to /Applications
+This will build from source and:
+1. Install the `.app` bundle
 2. Automatically configure Claude Code hooks for real-time status
-3. Launch the app
 
-No Xcode required — installs a pre-built binary.
+Xcode 15+ is required to build.
+
+## Launch
+
+```bash
+open $(brew --prefix)/opt/observation-deck/ClaudeMonitor.app
+```
+
+## Upgrade
+
+```bash
+brew upgrade observation-deck
+```
 
 ## Uninstall
 
 ```bash
-brew uninstall --cask observation-deck
-```
+# Remove hooks from Claude Code settings
+$(brew --prefix)/share/observation-deck/install-hooks.sh --uninstall
 
-This automatically removes the hooks from your Claude Code settings.
+# Uninstall the app
+brew uninstall observation-deck
+brew untap muddled-design/observation-deck
+```
